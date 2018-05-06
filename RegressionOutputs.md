@@ -1,4 +1,3 @@
-# The best cost driver for cost of distribution is Cost of Goods Sold
 # Regression Outputs
 
 ### Total Cost of distribution
