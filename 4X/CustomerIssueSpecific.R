@@ -31,3 +31,25 @@ summary(smlr_Model_1)
 
 # Conclusion =================================================================================
 # There exists no cost driver to predict customer related issue costs
+
+#############################################################################################
+# NEW APPROACH
+#############################################################################################
+
+summary(CSIdat$Customer_related_Issues_Costs)
+plot(CSIdat$Customer_related_Issues_Costs~CSIdat$Cost_of_Goods_Sold_EURO)
+# CSIdat$Customer_related_Issues_Costs has a reall large isue cost ? why is this there 
+
+# Size of data before 32378
+CSIdat<-CSIdat[(CSIdat$Customer_related_Issues_Costs<=20000)&
+                 (CSIdat$Cost_of_Goods_Sold_EURO<=500000),]
+# Size of data after 32297
+
+
+plot(CSIdat$Customer_related_Issues_Costs~CSIdat$Cost_of_Goods_Sold_EURO)
+# Still we cannot see a lienar trenf
+# most of them are trapped between 0-5000
+
+# Regression attempt 1 ========================================================================
+smlr_Model_1 <- lm(Customer_related_Issues_Costs~.,data=CSIdat)
+summary(smlr_Model_1)

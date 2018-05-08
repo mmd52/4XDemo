@@ -37,6 +37,40 @@ Conclusion =====================================================================
 # Howerver predicting operation costs alone or supply chain management cost alone with all the 
 # cost drivers yield terrible results (Will havre to figure out a working for this)
 ```
+#### A new Approach
+```
+# Conclusion ==================================================================================
+smlr_Model_5 <- lm(Supply_Chain_Management_Costs~.,data=OCdat)
+summary(smlr_Model_5)
+# Output
+# Residual standard error: 990 on 16078 degrees of freedom
+# Multiple R-squared:  0.5955,	Adjusted R-squared:  0.5937 
+# F-statistic: 328.8 on 72 and 16078 DF,  p-value: < 2.2e-16
+
+# Nope just a small improvement but I have a feeling we can use ~0.6 so as to speak
+
+# In short success mantra for supply chain management is ensuring
+# A) Cost_of_Goods_Sold_EURO<=500000
+# B) Supply_Chain_Management_Costs<=500000
+
+# Regression attempt 1 ========================================================================
+smlr_Model_1 <- lm(Total_Operations_Costs~.,data=OCdat)
+summary(smlr_Model_1)
+
+# Output
+# Residual standard error: 1970 on 32223 degrees of freedom
+# Multiple R-squared:  0.7655,	Adjusted R-squared:  0.7649 
+# F-statistic:  1366 on 77 and 32223 DF,  p-value: < 2.2e-16
+
+# AN R square we can live with , excellent news !
+# So 2 more geniuses conqured,
+# This means if i go back and retry the regressions for other costs, eliminating the outliers
+# might be able to further boost their accuracies
+# reason for success 
+# (OCdat$Cost_of_Goods_Sold_EURO<=500000)&(OCdat$Total_Operations_Costs<=500000)
+
+```
+
 
 ### Customer Related Issue Costs
 ```

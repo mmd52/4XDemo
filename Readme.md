@@ -13,3 +13,10 @@
 * Adding all these prediction values
 * Providing total cost with the help of graph
 * *SHINY*
+
+### Day2
+* Ok so now I am able to predict supply chain management costs and Total operations costs, mainly due to COGS, however I acheived this by elimating outliers on both sides
+* R Square for supply chain management costs is roughly 0.6 and total operations cost is 0.7 , not the best but liveable
+* I have a feeling i can boost their accuracies more by probably trying regression trees
+* Regardless time to move on to Customer related issue costs
+* I guess there is no hope for csi related issue costs - I give up here , will come back to this after some EDA
