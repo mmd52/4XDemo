@@ -31,3 +31,9 @@
 * * Cost of distribution, Order management and operations costs for springs is high ,However quantity for MIVI is the highest. And customer relted issue costs for plugs and caps are the highest
 > *Quick Conclusion-* Total cost of Distribution and Customer and order management costs can easily be predicted using COGS. To predict Operations costs , we need to get rid of the outliers if we do that cogs is able to predict not only operations cost but also supply chain management costs. How to predict customer related issue costs is still a mystery
 * Link to EDA output is [here](https://github.com/mmd52/4XDemo/blob/master/TableauPlayArea/4X_EDA.pdf)
+
+#### Meeting 2
+* For CUS related ISSUE COSTS create  average matrix for product line and geographical area and specify the cost
+* Wait for additional data
+* Proceed with r shiny
+* Ensure a slightly accurate upper and lower bound

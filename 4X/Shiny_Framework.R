@@ -23,7 +23,8 @@ ui <- dashboardPage(
       tabItem(tabName = "Predictor",tags$style(type="text/css",
                                                ".shiny-output-error { visibility: hidden; }",
                                                ".shiny-output-error:before { visibility: hidden; }"),
-              fluidPage(":)",fluidRow(
+              fluidPage("",
+                        fluidRow(
                 fileInput('TextFile', 'Choose Text file to upload',
                           accept = c(
                             'text/csv',
@@ -36,6 +37,25 @@ ui <- dashboardPage(
                   tags$tr(
                     tags$td(
                       numericInput('COGS','Cost of goods sold',value=1)
+                    ),
+                    tags$td(
+                      numericInput('QTY_Units','Quantity Units',value=1)
+                    )
+                  ),
+                  tags$tr(
+                    tags$td(
+                      numericInput('NDeliv','Number of Deliveries',value=1)
+                    ),
+                    tags$td(
+                      numericInput('N_Parts','Number of Parts',value=1)
+                    )
+                  ),
+                  tags$tr(
+                    tags$td(
+                      numericInput('ALM','Assembly_Labour_Minutes',value=1)
+                    ),
+                    tags$td(
+                      numericInput('MM','Machinery_Minutes',value=1)
                     )
                   ),
                   tags$tr(
@@ -72,15 +92,38 @@ ui <- dashboardPage(
                 
                 
                 
-                infoBoxOutput("Load_Info"),
+                
                 textOutput("MLOP")
               )
               )
       ),
-      tabItem(tabName = "IF",tags$style(type="text/css",
+      tabItem(tabName = "Visualisations",tags$style(type="text/css",
                                         ".shiny-output-error { visibility: hidden; }",
-                                        ".shiny-output-error:before { visibility: hidden; }")
-              ,dataTableOutput("hd")
+                                        ".shiny-output-error:before { visibility: hidden; }"),
+              fluidPage("",
+                         fluidRow(
+                           tags$h2("Predictions are"),
+                           tags$table(
+                             tags$tr(
+                               tags$td(tags$h5("Total Cost Of Distribution")),
+                               tags$td(textOutput("TCOD"))
+                             ),
+                             tags$tr(
+                               tags$td(tags$h5("Total Cost Of Customer and Order Management")),
+                               tags$td(textOutput("TCOM"))
+                             ),
+                             tags$tr(
+                               tags$td(tags$h5("Total Cost Of Supply Chain And Management")),
+                               tags$td(textOutput("TCOSCAM"))
+                             ),
+                             tags$tr(
+                               tags$td(tags$h5("Total Cost Of Operations")),
+                               tags$td(textOutput("TCOO"))
+                             )
+                           ),
+                           dataTableOutput("hd")
+                           )
+                        )
       )
       
     )       
@@ -102,11 +145,6 @@ server <- function(input, output) {
   })
   
   
-  output$Load_Info <- renderInfoBox({
-    
-    print("2")
-    infoBox("Machine has thought  : ", icon = icon("thumbs-up", lib = "glyphicon"),color = "blue")
-  })  
   
   output$MLOP <- renderText({
     dat<-data_l()
