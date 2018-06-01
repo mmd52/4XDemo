@@ -37,3 +37,13 @@
 * Wait for additional data
 * Proceed with r shiny
 * Ensure a slightly accurate upper and lower bound
+
+### Day3
+* For Customer Related Issue cost a matrix of geographical area against Product line has been prepared with means values in it. So since we cant predict it, we will fit in a value from here
+* The next big problem faced is that because of the characteristic of regression , the output has negative values. Three ways to eliminte this
+* 1. Either keep only cogs, but loose quality of prediction in tradeoff
+* 2. Or we remove outlier values not just on the extreme right but also on the left. The left values are not outsiders but are quite close to 0. for example 0.11. So the complexity enters because most of the values lie between 0-10 Euros(approx 40%).
+* 3. If a negative value is encountered show it as 0
+* Next big problem is accuracy. The rsquare is great, however the model is not able to keep up with the strange patterns in data. Linear regression doesnt seem like the best option, still it gave better output then XGBOOST.
+* I will try SVM and Random forest once and check if there is some imporovement (I doubt this)
+* need to think with a different approach (****Rethink****)
