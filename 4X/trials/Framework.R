@@ -137,3 +137,33 @@ tuneResult <- tune(svm, Total_Customer_Order_Management_Costs~.,data = training_
                    ranges = list(epsilon = seq(0,1,0.1), cost = 2^(2:3),verbose=T)
 )
 print(tuneResult)
+
+# ===========================================================================================
+require(randomForest)
+
+
+
+Boston.rf=randomForest(Total_Customer_Order_Management_Costs ~ . , data = CMdat , subset = train)
+Boston.rf
+
+plot(Boston.rf)
+
+
+oob.err=double(13)
+test.err=double(13)
+
+#mtry is no of Variables randomly chosen at each split
+for(mtry in 1:13) 
+{
+  rf=randomForest(Total_Customer_Order_Management_Costs ~ . , data = CMdat , subset = train,mtry=mtry,ntree=150) 
+  oob.err[mtry] = rf$mse[150] #Error of all Trees fitted
+  
+  pred<-predict(rf,CMdat[-train,]) #Predictions on Test Set for each Tree
+  test.err[mtry]= with(CMdat[-train,], mean( (CMdat[,3] - pred)^2)) #Mean Squared Test Error
+  
+  cat(mtry," ") #printing the output to the console
+  
+}
+
+matplot(1:mtry , cbind(oob.err,test.err), pch=19 , col=c("red","blue"),type="b",ylab="Mean Squared Error",xlab="Number of Predictors Considered at each Split")
+legend("topright",legend=c("Out of Bag Error","Test Error"),pch=19, col=c("red","blue"))

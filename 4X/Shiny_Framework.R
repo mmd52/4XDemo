@@ -84,8 +84,35 @@ ui <- dashboardPage(
                     )
                   ),
                   tags$tr(
-                    tags$td(textInput('Product_Line_IN','Enter Product Line',value="Springs")),
-                    tags$td(textInput('Product_Type_IN','Enter Product Line',value="Air Springs"))
+                    tags$td(
+                      selectInput('Product_Line_IN','Enter Product Line',
+                                  c("Plugs and Caps"="Plugs and Caps","Profiles"="Profiles",
+                                    "Building Materials"="Building Materials","Basic Components"="Basic Components",
+                                    "Springs"="Springs","Cables"="Cables","High-Tech Cables"="High-Tech Cables",
+                                    "Pull Cables"="Pull Cables","Pull Cables China"="Pull Cables China",
+                                    "Cables China"="Cables China","Profiles Trading"="Profiles Trading",
+                                    "Springs Trading"="Springs Trading","Residual Springs"="Residual Springs",
+                                    "Springs China"="Springs China","MIVI"="MIVI","TP 821"="TP 821",
+                                    "TP 821-822"="TP 821-822"))),
+                    tags$td(
+                      selectInput('Product_Type_IN','Enter Product Type',
+                                  c("Spare Parts"="Spare Parts","Plugs"="Plugs","Not Defined"="Not Defined",
+                                    "Metal Profiles"="Metal Profiles","Handles"="Handles",
+                                    "Clamping Levers"="Clamping Levers","Caps"="Caps","Feet"="Feet",
+                                    "Knobs"="Knobs","Air Springs"="Air Springs","Gas Springs"="Gas Springs",
+                                    "Cable Glands"="Cable Glands","Wheels"="Wheels",
+                                    "Cable Protectors"="Cable Protectors","Cable Entry Systems"="Cable Entry Systems",
+                                    "Cable Entry Frames"="Cable Entry Frames","Pull Cables"="Pull Cables",
+                                    "Casters"="Casters","Levers"="Levers","Handwheels"="Handwheels",
+                                    "Feedthroughs"="Feedthroughs",
+                                    "Modular Structure Fittings"="Modular Structure Fittings",
+                                    "Dampers"="Dampers","Rotary Dampers"="Rotary Dampers",
+                                    "Speed Control Dampers"="Speed Control Dampers",
+                                    "Anti-Vibration Mounts"="Anti-Vibration Mounts","Bumpers"="Bumpers",
+                                    "Stops"="Stops",
+                                    "Construction Anti-Vibration Pads"="Construction Anti-Vibration Pads",
+                                    "Shock Dampers"="Shock Dampers","Thrust Pads"="Thrust Pads",
+                                    "Basic Pads"="Basic Pads")))
                   )
                 ),
                 tags$hr(),
@@ -120,8 +147,7 @@ ui <- dashboardPage(
                                tags$td(tags$h5("Total Cost Of Operations")),
                                tags$td(textOutput("TCOO"))
                              )
-                           ),
-                           dataTableOutput("hd")
+                           )
                            )
                         )
       )
