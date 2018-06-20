@@ -29,6 +29,7 @@ col<-c("Plant","Cost_of_Goods_Sold_EURO","Total_Cost_of_Distribution",
        "Product_Line","Product_Type","Customer_Class","Turnover_Range_EURO","Geographical_Area")
 
 
+
 smlr_Model_TCD <- lm(Total_Cost_of_Distribution~.,data=subset(ndat, select=col))
 summary(smlr_Model_TCD)
 

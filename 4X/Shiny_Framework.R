@@ -11,8 +11,8 @@ ui <- dashboardPage(
   ## Sidebar content
   dashboardSidebar(
     sidebarMenu(
-      menuItem("Predictor", tabName = "Predictor", icon = icon("Predictor")),
-      menuItem("Visualisations", tabName = "Visualisations", icon = icon("Important Findings"))
+      menuItem("Inputs", tabName = "Predictor", icon = icon("Predictor")),
+      menuItem("Predictions", tabName = "Visualisations", icon = icon("Important Findings"))
       
     )
   ),
@@ -115,12 +115,7 @@ ui <- dashboardPage(
                                     "Basic Pads"="Basic Pads")))
                   )
                 ),
-                tags$hr(),
-                
-                
-                
-                
-                textOutput("MLOP")
+                tags$hr()
               )
               )
       ),
@@ -132,23 +127,53 @@ ui <- dashboardPage(
                            tags$h2("Predictions are"),
                            tags$table(
                              tags$tr(
-                               tags$td(tags$h5("Total Cost Of Distribution")),
-                               tags$td(textOutput("TCOD"))
+                               tags$th("Cost"),
+                               tags$th("Lower Bound"),
+                               tags$th("Prediction"),
+                               tags$th("Upper Bound")
                              ),
                              tags$tr(
-                               tags$td(tags$h5("Total Cost Of Customer and Order Management")),
-                               tags$td(textOutput("TCOM"))
+                               tags$td(tags$h4("Total Cost Of Distribution")),
+                               tags$td(tags$h4("5")),
+                               tags$td(tags$h4("7")),
+                               #tags$td(tags$h4("9"))
+                               tags$td(tags$h4(textOutput("TCOD")))
                              ),
                              tags$tr(
-                               tags$td(tags$h5("Total Cost Of Supply Chain And Management")),
-                               tags$td(textOutput("TCOSCAM"))
+                               tags$td(tags$h4("Total Cost Of Customer and Order Management")),
+                               tags$td(tags$h4("5")),
+                               tags$td(tags$h4("7")),
+                               tags$td(tags$h4("9"))
+                               #tags$td(textOutput("TCOM"))
                              ),
                              tags$tr(
-                               tags$td(tags$h5("Total Cost Of Operations")),
-                               tags$td(textOutput("TCOO"))
-                             )
+                               tags$td(tags$h4("Total Cost Of Supply Chain And Management")),
+                               tags$td(tags$h4("5")),
+                               tags$td(tags$h4("7")),
+                               tags$td(tags$h4("9"))
+                               #tags$td(textOutput("TCOSCAM"))
+                             ),
+                             tags$tr(
+                               tags$td(tags$h4("Total Cost Of Operations")),
+                               tags$td(tags$h4("5")),
+                               tags$td(tags$h4("7")),
+                               tags$td(tags$h4("9"))
+                               #tags$td(textOutput("TCOO"))
+                             ),
+                             tags$tr(
+                               tags$td(tags$h3("Total")),
+                               tags$td(tags$h3("20")),
+                               tags$td(tags$h3("28")),
+                               tags$td(tags$h3("36"))
+                               #tags$td(textOutput("TCOO"))
+                             ),
+                             tags$style(type="text/css","th{ padding:0 15px 0 15px; }"),
+                             tags$style(type="text/css","td{ padding:0 15px 0 15px; }")
                            )
-                           )
+                           ),
+                        fluidRow(
+                          plotOutput("bar_plot",width = "1100px",height = "400px")
+                        )
                         )
       )
       
@@ -161,16 +186,46 @@ ui <- dashboardPage(
 options(shiny.maxRequestSize=30*1024^2)
 server <- function(input, output) {
   
-  data_l<-reactive({
+  # data_l<-reactive({
+  #   inFile <- input$TextFile
+  #   if (is.null(inFile))
+  #     return(NULL)
+  #   data<-read.csv(inFile$datapath,header=T)
+  #   data<-data[,-1]
+  #   if(args==1){return(data)}
+  #   return(data)
+  # })
+  
+  HardWorker <- function(x)
+  {
     inFile <- input$TextFile
-    if (is.null(inFile))
-      return(NULL)
     data<-read.csv(inFile$datapath,header=T)
-    data<-data[,-1]
-    return(data)
-  })
+    # Load variables from screen
+    COGS <- input$COGS ; QTY_Units <- input$QTY_Units ; NDeliv <- input$NDeliv 
+    N_Parts <- input$N_Parts ; ALM <- input$ALM ; MM <- input$MM
+    Geographical_Region_IN <- input$Geographical_Region_IN ; Plant_IN <- input$Plant_IN
+    Customer_Class_IN <- input$Customer_Class_IN ; Turnover_Range_IN <- input$Turnover_Range_IN
+    Product_Line_IN <- input$Product_Line_IN ; Product_Type_IN <- input$Product_Type_IN
+    
+    # TCOD Regression
+    
+    # CRI Regression
+    
+    # COMC Regression
+    
+    # SCM Cost Regression
+    
+    if(x==1){return(N_Parts)}
+    else if(x==2){return(2)}
+    else if(x==3){return(3)}
+    else if(x==4){return(4)}
+    else if(x==5){return(1+2+3+4+5)}
+    else {return(0)}
+  }
   
-  
+  output$TCOD <- renderText({paste(HardWorker(1))})
+  output$TOMC <- renderText({})
+  output$TCRI <- renderText({})
   
   output$MLOP <- renderText({
     dat<-data_l()
@@ -190,7 +245,20 @@ server <- function(input, output) {
     
   })
   
-  output$hd <- renderDataTable(data_l())
+  output$bar_plot<- renderPlot({
+    data=matrix(c(c(2,3,1,4),c(3,4,2,5),c(4,5,3,6)) , nrow=4)
+    colnames(data)=c("Lower Bound","Prediction","Upper Bound")
+    rownames(data)=c("Distribution Cost","Order Management Cost","Supply Chain","Operations Cost")
+    
+    # Get the stacked barplot
+    barplot(data,col=c("#223052","#405281","#a8b7c0","#cadfea")#, border="white"
+            , space=0.04, font.axis=2,
+            xlab="group",horiz=F)#,legend=rownames(data))
+    legend("topleft", 
+           legend = rownames(data), 
+           fill = c("#223052","#405281","#a8b7c0","#cadfea"), ncol = 2,cex = 1.2)
+    
+  })
   
 }
 shinyApp(ui, server)

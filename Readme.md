@@ -47,3 +47,13 @@
 * Next big problem is accuracy. The rsquare is great, however the model is not able to keep up with the strange patterns in data. Linear regression doesnt seem like the best option, still it gave better output then XGBOOST.
 * I will try SVM and Random forest once and check if there is some imporovement (I doubt this)
 * need to think with a different approach (****Rethink****)
+
+### Day4
+* I eliminated outliers and now have 15000 data points
+* next i should try normalising the data set
+
+### Day5
+* The bar plot with a good color scheme is fixed
+* A working shiny application with reactive expressions is ready
+* It is currently hollow, need to fix a model behind it
+* ET to fix a working model 3-4 hours

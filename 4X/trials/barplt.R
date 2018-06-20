@@ -7,7 +7,7 @@ rm(list=ls())
 source("Libraries.R")
 
 # Loading Data ============================================================
-dat<-read.csv('4Xdata.csv',header=TRUE)
+dat<-read.csv(file.choose(),header=TRUE)
 dat<-dat[,-1]
 dat$Average_Delivery_Batch_Size_units<-as.numeric(dat$Average_Delivery_Batch_Size_units)
 dat$Number_of_Deliveries<-as.numeric(dat$Number_of_Deliveries)
@@ -31,16 +31,17 @@ barplot(counts, main="Car Distribution by1 Gears and VS",
 
 #Create data
 set.seed(112)
-data=matrix(c(10,30,20) , nrow=3)
-colnames(data)=c("Cost")
+data=matrix(c(c(10,20,30),c(30,40,50)) , nrow=3)
+data
+colnames(data)=c("Cost1","cost2")
 rownames(data)=c("TCD","COM","OC")
 
 # Get the stacked barplot
 barplot(data, border="white", space=0.04, font.axis=2,
-        xlab="group",legend=rownames(data),horiz=T)
+        xlab="group",legend=rownames(data),horiz=F)
 
 # Grouped barplot
 barplot(data, col=colors()[c(23,89,12)] , border="white", font.axis=2, legend=rownames(data),
         horiz=TRUE, font.lab=2)
 
-qplot(x = Cost, y = c(10,20,30), data = data, geom = "bar", fill = variable)
+#qplot(x = Cost, y = c(10,20,30), data = data, geom = "bar", fill = variable)
