@@ -1,0 +1,13 @@
+name: costprediction
+title: CostPrediction
+username:
+account: mohammedtopiwalla
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 365445
+bundleId: 1443869
+url: https://mohammedtopiwalla.shinyapps.io/costprediction/
+when: 1529696509.81918
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|4X_model.csv|4X_ShinyBoy.csv|4Xdata.csv|4Xdata_Base.csv|BabyMaker.R|CustomerRelatedIssueCostMatrix.csv|Libraries.R|TempEquationBuilder.R|Initial/CostDistributionSpecific.R|Initial/CustomerAndOrderManagementSpecific.R|Initial/CustomerIssueSpecific.R|Initial/CustomerRelatedIssueCostMatrixScript.R|Initial/DataCleaning.R|Initial/FinalRegressions.R|Initial/OperationsCostSpecific.R|Initial/OutlierElimination.R|trials/barplt.R|trials/CostDistributionRevamped.R|trials/Framework.R|trials/How_To_Predict.R|trials/MarginTE.R|trials/UpperLowerAssistance.R
